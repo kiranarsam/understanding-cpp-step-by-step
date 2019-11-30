@@ -13,10 +13,37 @@ The _new_ operator denotes a request for memory allocation on the Heap. If suffi
 memory is available, new operator initializes the memory and returns the address of the 
 newly allocated and initialized memory to the pointer variable.
 * **Syntax to use new operator:** To allocate memory of any data type, the syntax is
-    `pointer-variable = new data-type;`
-    `Example:`
-    `int *p = NULL;`
-    `p = new int;`
+    ```
+    pointer-variable = new data-type;
+    Example:
+    int *p = NULL;
+    p = new int;
+    
+    or
 
+    int *p = new int;
+    ```
 * **Initialise memory:** We can also initialize the memory using new operator.
-    - ``
+    ```
+    int *p = new int(25);
+    float *f = new float(32.46);
+    ```
+* **Allocate block of memory:** new operator is also used to allocate a block(an array) 
+of type data-type. _size_ specifies the number of elements in an array.
+    ```
+    pointer-variable = new data-type[size];
+    Example:
+        int *p = new int[20];
+    ```
+
+## delete operator
+Programmer's responsibility to deallocate dynamically allocated memory.
+```
+// release memory pointed to pointer variable
+**delete** pointer-variable;
+```
+To free the dynamically allocated array pointed by pointer-variable,
+```
+delete[] pointer-variable;
+```
+
