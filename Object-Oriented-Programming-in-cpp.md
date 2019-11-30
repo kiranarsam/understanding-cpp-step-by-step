@@ -1,14 +1,14 @@
 # Object Oriented Programming
 ## **TABLE OF CONTENT**
     1. Introduction
-    1. Class
-    1. Objects
-    1. Encapsulation
-    1. Abstraction
-    1. Polymorphism
-    1. Inheritance
-    1. Dynamic Binding
-    1. Message Passing
+    2. Class
+    3. Objects
+    4. Encapsulation
+    5. Abstraction
+    6. Polymorphism
+    7. Inheritance
+    8. Dynamic Binding
+    9. Message Passing
 
 ### **Introduction**
 Object-oriented programming - aims to implement real-world entities like inheritance,
