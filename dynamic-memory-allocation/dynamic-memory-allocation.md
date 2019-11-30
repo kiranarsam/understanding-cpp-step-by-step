@@ -14,4 +14,9 @@ memory is available, new operator initializes the memory and returns the address
 newly allocated and initialized memory to the pointer variable.
 * **Syntax to use new operator:** To allocate memory of any data type, the syntax is
     `pointer-variable = new data-type;`
+    `Example:`
+    `int *p = NULL;`
+    `p = new int;`
+
 * **Initialise memory:** We can also initialize the memory using new operator.
+    - ``
