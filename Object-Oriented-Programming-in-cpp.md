@@ -74,7 +74,52 @@ different types of tasks.
 
 Polymorphism is extensively used in implementing inheritance.
 
+#### Types of Polymorphism
+* Compile Time
+    * Function Overloading
+    * Operator Overloading
+* Run Time
+    * Virtual Functions
+
 ### Inheritance
+The capability of a class to derive properties and characteristics from another class is 
+called inheritance.
+
+* **Sub Class:** The class that inherits properties from another class is called 
+Sub class or Derived Class.
+* **Super Class:** The class whose properties are inherited by sub class is called 
+Base Class or Super Class.
+* **Reusability:** Inheritance supports the concept of "reusability", i.e. when we want 
+to create a new class and there is already a class that includes some of the code that we want,
+we can derive our new class from the existing class. By doing this, we are reusing the fields 
+and methods of the existing class.
+
+#### Types of Inheritance
+* Single Inheritance
+    - Child Class X --> Parent Class A
+* Multiple Inheritance
+    - Child Class X --> Parent Class A, Parent Class B
+* Multilevel Inheritance
+    - Child Class Y --> Child Class X --> Parent Class A
+* Hierarchical Inheritance
+    - Child Class X --> Parent Class A
+    - Child Class Y --> Parent Class A
+    - Child Class Z --> Parent Class A
+* Hybrid Inheritance
+    - Derived Class B --> Parent Class A
+    - Derived Class C --> Parent Class A
+    - Derived Class D --> Derived Class B, Derived Class C
+
+### Dynamic Binding
+In dynamic binding, the code to be executed in response to function call is decided at runtime.
+C++ has virtual functions to support this.
+
+### Message Passing
+Objects communicate with one another by sending and receiving information to each other. 
+A message for an object is an object is a request for execution of a procedure and therfore 
+will invoke a function in the receiving object that generates the desired results. 
+Message passing involves specifying the name of the object, the name of the function and 
+the information to be sent.
 
 
 
