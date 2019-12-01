@@ -102,7 +102,6 @@ posses different behaviour in different situations. It's called polymorphism.
 ### Two types of polymorphism
 * Compile time Polymorphism
 * Runtime Polymorphism
-![Polymorphism](Types-Polymorphism.jpg)
-Format: ![Types of Polymorphism](/object-oriented-programming/Types-Polymorphism.jpg)
+![Polymorphism](/object-oriented-programming/Types-Polymorphism.jpg)
 
 
