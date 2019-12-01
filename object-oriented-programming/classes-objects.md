@@ -103,6 +103,6 @@ posses different behaviour in different situations. It's called polymorphism.
 * Compile time Polymorphism
 * Runtime Polymorphism
 ![Polymorphism](Types-Polymorphism.jpg)
-Format: ![Types of Polymorphism](/understanding-cpp-step-by-step/object-oriented-programming/Types-Polymorphism.jpg)
+Format: ![Types of Polymorphism](/object-oriented-programming/Types-Polymorphism.jpg)
 
 
