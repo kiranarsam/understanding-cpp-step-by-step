@@ -47,3 +47,9 @@ To free the dynamically allocated array pointed by pointer-variable,
 delete[] pointer-variable;
 ```
 
+# malloc vs new 
+### differences between malloc() and new
+1. **Calling Constructors:** _new_ calls constructors, while _malloc_ does not. In fact 
+primitive data types can also be initialized with _new_.
+1. **operator vs function:** _new_ is an operator, while _malloc_ is a function.
+1. **return type:** 
