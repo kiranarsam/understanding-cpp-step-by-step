@@ -2,7 +2,7 @@ Dynamic memory allocation refers to performing memory allocation manually by pro
 Dynamically allocated memory is allocated on **Heap** and non-static and local variables 
 get memory allocated on **Stack**.
 
-### How is memory allocated / deallocated in C++
+## How is memory allocated / deallocated in C++
 C uses _malloc()_ and _calloc()_ function to allocate memory dynamically at runtime and 
 uses _free()_ function to free dynamically allocated memory.
 C++ uses _**new**_ and _**delete**_ that perform the task of allocating and freeing the 
@@ -47,7 +47,7 @@ To free the dynamically allocated array pointed by pointer-variable,
 delete[] pointer-variable;
 ```
 
-# malloc vs new 
+## malloc vs new 
 ### differences between malloc() and new
 1. **Calling Constructors:** _new_ calls constructors, while _malloc_ does not. In fact 
 primitive data types can also be initialized with _new_.
@@ -62,14 +62,14 @@ allocated is done from heap.
 manually calculate size for _malloc_.
 1. **Buffer Size:** _malloc_ allows to change the size of buffer using _realloc_, while new doesn't.
 
-# delete vs free
+## delete vs free
 **delete** operator should only be used either for the pointers pointing to the memory 
 allocated using _new_ operator or for a _NULL_ pointer,
 **free** should only be used either for the pointers pointing to the memory allocated using 
 _malloc_ or for a NULL pointer.
 
 
-# std::get_temporary_buffer
+## std::get_temporary_buffer
 Get a block of temporary memory.
 * This function take a size _n_ and return the largest available buffer up to size n which 
 can be fit into physical memory.
