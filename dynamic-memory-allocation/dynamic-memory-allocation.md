@@ -52,4 +52,33 @@ delete[] pointer-variable;
 1. **Calling Constructors:** _new_ calls constructors, while _malloc_ does not. In fact 
 primitive data types can also be initialized with _new_.
 1. **operator vs function:** _new_ is an operator, while _malloc_ is a function.
-1. **return type:** 
+1. **return type:** _new_ retuns exact data type, while _malloc_ returns _void *_.
+1. **Failure Condition:** On failure _malloc_ returns NULL, where as _new_ throws bad_alloc
+execption.
+1. **Memory:** In case of _new_ memory is allocated from free store, where as _malloc_ memory 
+allocated is done from heap.
+1. **Overriding:** We are allowed to override _new_ operator, _malloc_ cannot override.
+1. **Size:** Required size of memory is allocated by compiler for _new_, where as we have to 
+manually calculate size for _malloc_.
+1. **Buffer Size:** _malloc_ allows to change the size of buffer using _realloc_, while new doesn't.
+
+# delete vs free
+**delete** operator should only be used either for the pointers pointing to the memory 
+allocated using _new_ operator or for a _NULL_ pointer,
+**free** should only be used either for the pointers pointing to the memory allocated using 
+_malloc_ or for a NULL pointer.
+
+
+# std::get_temporary_buffer
+Get a block of temporary memory.
+* This function take a size _n_ and return the largest available buffer up to size n which 
+can be fit into physical memory.
+* This function get a memory of temporary nature mostly used for the operation of an alogortihm 
+as some algorithms required extra space to perform correctly.
+* Once the memory block is assigned is not needed anymore, it shall be released by calling 
+**return_temprory_buffer**.
+
+```
+Syntax:
+pair(int *, ptrdiff_t) p = get_temporary_buffer(int)(required_size)
+```
