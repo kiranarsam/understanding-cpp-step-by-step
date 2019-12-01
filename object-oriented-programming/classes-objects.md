@@ -104,4 +104,22 @@ posses different behaviour in different situations. It's called polymorphism.
 * Runtime Polymorphism
 ![Polymorphism](/object-oriented-programming/Types-Polymorphism.png)
 
+1. **Compile time polymorphism:** It is achieved by function overloading or operator overloading
+    * **Function Overloading:** When there are multiple functions with same name but different 
+    parameters then these functions are said to be **overloaded**. Functions can be overloaded 
+    by **change in number of arguments** or/and **change in type of arguments**.
+    * **Operator Overloading:** C++ also provide option to overload operators. For example, we 
+    can make the operator (‘+’) for string class to concatenate two strings. We know that this 
+    is the addition operator whose task is to add two operands. So a single operator ‘+’ when 
+    placed between integer operands , adds them and when placed between string operands, 
+    concatenates them.
+
+1. **Runtime polymorphism:** It is achieved by Function Overriding.
+    * **Function Overriding:** when a derived class has a definition for one of the member 
+    functions of the base class. That base function is said to be **overridden**.
+
+
+
+
+
 
