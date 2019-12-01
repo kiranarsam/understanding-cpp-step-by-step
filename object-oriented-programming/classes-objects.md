@@ -70,6 +70,39 @@ class subclass_name : access_mode base_class_name
 **NOTE:** A derived class doesn’t inherit **access** to private data members. However, it does 
 inherit a full parent object, which contains any private members which that class declares.
 
+## Modes of Inheritance
+1. **Public mode:** If we derive a sub class from a public base class. Then the public member 
+of the base class will become public in the derived class and protected members of the base 
+class will become protected in derived class.
+1. **Protected mode:** If we derive a sub class from a Protected base class. Then both public 
+member and protected members of the base class will become protected in derived class.
+1. **Private mode:** If we derive a sub class from a Private base class. Then both public 
+member and protected members of the base class will become Private in derived class.
 
+**NOTE:** The private members in the base class cannot be directly accessed in the derived 
+class, while protected memebers can be directly accessed.
+
+## Types of Inheritance
+1. **Single Inheritance:** A class is allowed to inherit from only one class. i.e. one sub 
+class is inherited by one class only.
+1. **Multiple Inheritance:** A class can inherit from more than one classes. i.e. one _sub_ 
+_class_ is inherited from more than one _base classes_.
+1. **Multilevel Inheritance:** A derived class is created from another derived class.
+1. **Hierarchical Inheritance:** More than one sub class is inherited from a single base class. 
+i.e. more than one derived class is created from a single base class.
+1. **Hybrid (Virtual) Inheritance:** By combining more than one type of inheritance. Its 
+combination of hierarchical and multiple inheritance.
+
+# Polymorphism
+Means having many forms. Polymorphism as the ability of a message to be displayed in more than 
+one form. 
+Example:- Like a man at the same time is a father, a husband, an employee. So the same person 
+posses different behaviour in different situations. It's called polymorphism.
+
+### Two types of polymorphism
+* Compile time Polymorphism
+* Runtime Polymorphism
+![Polymorphism](Types-Polymorphism.jpg)
+Format: ![Types of Polymorphism](/understanding-cpp-step-by-step/object-oriented-programming/Types-Polymorphism.jpg)
 
 
