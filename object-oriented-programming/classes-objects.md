@@ -118,6 +118,46 @@ posses different behaviour in different situations. It's called polymorphism.
     * **Function Overriding:** when a derived class has a definition for one of the member 
     functions of the base class. That base function is said to be **overridden**.
 
+# Encapsulation
+It is defined as wrapping up of data and information under a single unit. In OOP, Encapsulation 
+is defined as binding together the data and functions that manipulates them.
+
+Enacpsulation is also leads to data abstraction or hiding. As using encapsulation also hides 
+the data. 
+### Role of access specifiers in encapsulation
+Access specifiers plays an important role in implementing encapsulation. It is divided into two:
+1. Tha data members should be labeled as private using the **private** access specifiers.
+1. The member function which manipulates the data members should be labeled as public using 
+the **public** access specifier.
+
+# Abstraction
+Abstraction means displaying only essential information and hiding the details.
+Data Abstraction refers to providing only essential information about the data to the outside 
+world, hiding the background details or implementation.
+
+* **Abstraction using Classes:** Class helps us to group data members and member functions 
+using available access specifiers. A Class can decide which data members will be visible to 
+outside world and which is not.
+
+* **Abstraction in Header files:** Ex:- Consider the pow() method present in math.h 
+header file. Whenever we need to calculate power of a number, we simply call the function 
+pow() present in the math.h header file and pass the numbers as arguments without knowing 
+the underlying algorithm to which the function is actually calculating power of numbers.
+
+### Abstraction using access specifiers
+Access specifiers are the main pillar of implementing abstraction. We can use access 
+specifiers to enforce restrictions on class members.
+* Members declared as **public** in a class, can be accessed from anywhere in the program.
+* Members declared as **private** in a class, can be accessed only from within the class.
+They are not allowed to be accessed from any part of code outside the class.
+
+### Advantages of Data Abstraction
+* Helps the user to avoid writing the low-level code
+* Avoids code duplication and increases reusability
+* Can change internal implementation of class independently without effecting the users
+* Helps to increase security of an application or program as only important details are given 
+to the user.
+
 
 
 
