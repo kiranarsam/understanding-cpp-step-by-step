@@ -158,8 +158,24 @@ They are not allowed to be accessed from any part of code outside the class.
 * Helps to increase security of an application or program as only important details are given 
 to the user.
 
+# Structure vs Class
+A structure is the same as a class except for a few differences. The most important of them 
+is security. A Structure is not secure and cannot hide its implementation details from the 
+end user while a class is secure and can hide its programming and designing details.
+1. Members of a class are private by default and members of a struct are public by default.
+1. When deriving a struct from a class/struct, default access-specifier for a base class/struct 
+is public. And when deriving a class, default access specifier is private.
 
+# Can a C++ class have an object of self type?
+A class declaration can contain static object of self type, it can also have pointer to self 
+type, but it cannot have a non-static object of self type.
 
+If a non-static object is member then declaration of class is incomplete and compiler has no 
+way to find out size of the objects of the class.
 
+Static variables do not contribute to the size of objects. So, no problem in calculating size 
+with static variables of self type.
 
+For a compiler, all pointers have a fixed size irrespective of the data type they are pointing 
+to, so no problem with this also.
 
