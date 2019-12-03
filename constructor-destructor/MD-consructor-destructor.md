@@ -271,18 +271,84 @@ In practical scenarios we would need to create a derived class object in a class
 based on some input. Putting in other words, _object creation and object type are tightly_ 
 _coupled which forces modifications to extended. The objective of virtual constructor is to_ 
 _decouple object creation from it’s type_.
-```
+
+virtual constructor creates an object of class hierarchy at runtime based on some input. 
 Check the example: virtual-consturctor.cpp
+```
     // The "Virtual Constructor" 
     static Base *Create(int id);
 ```
 
+# Virtual Copy Constructor
+Sometimes we may need to construct an object from another existing object. Precisely the copy 
+constructor does the same. The initial state of new object will be based on another existing 
+object state. The compiler places call to copy constructor when an object being instantiated 
+from another object. However, the compiler needs concrete type information to invoke 
+appropriate copy constructor.
 
+Virtual constructor creates an object of class hierarchy at runtime based on some input. When 
+we want to copy construct an object from another object created by virtual constructor, we 
+can’t use usual copy constructor. We need a **special cloning function** that can duplicate the 
+object at runtime.
 
+The concept behind clone function is building block of **_prototype pattern_**.
+```
+    // The "Virtual Copy Constructor" 
+    virtual Base *Clone() = 0;
+```
 
+# When are static objects destroyed
+careful static keyword and static object
+## What is static keyword
+**static** keyword can be applied to local variables, functions, class’ data members and 
+objects. 
+static local variable retain their values between function call and initialized only once. 
+static function can be directly called using the scope resolution operator preceded by class name.
 
+## What are static objects
+An object become static when static keyword is used in its declaration. 
 
+```
+Test t;         \\ stack based object
+static Test t;  \\ static object
+```
+First statement when executes creates object on stack means storage is **allocated on stack**. 
+Stack based objects are also called automatic objects or local objects. 
 
+**static object** are initialized only once and live until the program terminates. 
+**Local object** is created each time its declaration is encountered in the execution of program.
+
+**static objects** are allocated storage in static storage area. 
+**static object** is destroyed at the termination of program. 
+This language supports both local static object and global static object.
+
+# Is it possible to call constructor and destructor explicitly
+**Constructor** is a special member function that is automatically called by compiler when 
+object is created and **destructor** is also special member function that is also implicitly 
+called by compiler when object goes out of scope.
+They are also called when dynamically allocated object is allocated and destroyed, new operator 
+allocates storage and calls constructor, delete operator calls destructor and free the memory allocated by new.
+
+### Is it possible to call constructor and destructor explicitly
+Yes, it is possible to call special member functions explicitly by programmer.
+
+* When the constructor is called explicitly the compiler creates a nameless temporary object 
+and it is immediately destroyed.
+```
+NOTE:
+Once a destructor is invoked for an object, the object no longer exists; the behavior is 
+undefined if the destructor is invoked for an object whose lifetime has ended.
+
+As mentioned here, we should never call destructor explicitly on local (automatic) object, 
+because really bad results can be acquired by doing that.
+
+Local objects are automatically destroyed by compiler when they go out of scope and this is the guarantee. In general, special member functions shouldn’t be called explicitly.
+```
+* Constructor and destructor can also be called from the member function of class.
+
+* Explicit call to destructor is only necessary when object is placed at particular location in 
+memory by using placement **new**. Destructor should not be called explicitly when the object 
+is dynamically allocated because **delete** operator automatically calls destructor.
 
 
 
