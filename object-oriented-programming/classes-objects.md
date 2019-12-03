@@ -179,3 +179,67 @@ with static variables of self type.
 For a compiler, all pointers have a fixed size irrespective of the data type they are pointing 
 to, so no problem with this also.
 
+# Why is the size of an empty class not zero
+Size of empty class is not zero. It is 1 Byte generally. It is non-zero to ensure that the two 
+different objects will have different addresses.
+
+Different objects should have different addresses, **_new_** always returns pointers to 
+distinct objects.
+
+**NOTE:** Empty base class need not be represented by a separate byte. So compilers are free 
+to make optimization in case of empty base classes.
+
+# Static Data Members
+Static data members must be explicitly defined outside the class using scope resolution operator.
+
+If we try to access static member without explicit definition of it, we will get compilation error.
+
+Static members are **_shared among all objects_**. That is why they are also known as 
+**class members or class fields**. Also, static members can be accessed without any object.
+
+# Some intresting facts about static member functions
+1. static member functions do not have **_this_** pointer.
+1. A static member function cannot be _virtual_
+1. Member function declarations with the same name and the name parameter-type-list cannot 
+be overloaded if any of them is a static member function declaration.
+Example:- `void Test::fun()` and `static void Test::fun()` cannot be overloaded.
+1. A static member function can not be declared _const, volatile or const volatile_.
+Example:- `static void fun() const` is invalid
+
+# friend class and function
+**Friend class** A friend class can access private and protected members of other class in 
+which it is declared as friend. It is sometimes useful to allow a particular class to access 
+private members of other class.
+
+**Friend function** A friend function can be given special grant to access private and 
+protected members. A friend function can be:
+1. A method of another class
+1. A global function
+
+* Friends should be used only for limited purpose. too many functions or external classes are 
+declared as friends of a class with protected or private data, it lessens the value of 
+encapsulation of separate classes in OOP.
+* Friendhip is not mutual. If class A is a friend of B, then B doesn't become a friend of A 
+automatically.
+* Friendship is not inherited.
+
+# Local Classes
+A class declared inside a function becomes local to that function and is called Local Class.
+1. A local class type name can only be used in the enclosing function.
+1. All the methods of Local classes must be defined inside the class only.
+1. A Local class cannot contain static data members. It may contain static functions though.
+1. Member methods of local class can only access static and enum variables of the enclosing 
+function. Non-static variables of the enclosing function are not accessible inside local classes.
+1. Local classes can access global types, variables, and functions. Also, local classes can 
+access other local classes of same function.
+
+# Nested Classes
+A nested class is a class which is declared in another enclosing class. A nested class is a 
+member and as such has the same access rights as any other member. The members of an enclosing 
+class have no special acces to members of a nested class rules shall be obeyed.
+
+# Simulating final class
+It makes use of private constructor, virutal inheritance and friend class.
+
+See the example:- how the usage of private constructor, virtual inheritance and friend class.
+`simulating-final-class.cpp`.
