@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -14,7 +15,7 @@ class Test {
         }
 };
 
-int main() {
+int main(int argc, char *argv[]) {
     Test t1 (10);
     const Test t2(20);
     t1.func();
