@@ -61,6 +61,25 @@ virtual destructor (even if it does nothing).
 # Virtual Constructor and Virtual Copy Constructor
 Please refer to [Virtual Constructor and Virtual Copy Constructor](/constructor-destructor/MD-consructor-destructor.md).
 
+# RTTI (Run-Time Type Information)
+RTTI (Run-time type information) is a mechanism that exposes information about an object’s data 
+type at runtime and is available only for the classes which have at least one virtual function. 
+It allows the type of an object to be determined during program execution.
+
+For example, **dynamic_cast** uses RTTI and following program fails with error:
+"cannot dynamic_cast 'b' (of type 'class Base*') to type 'class Derived*' (source type is not 
+polymorphic)” **because** there is no virtual function in the base class Base.
+Example: [Program fails over dynamic_cast which uses RTTI](/constructor-destructor/RTTI-fails-dynamic-cast.cpp).
+
+Adding a virtual function to the base class B makes it working.
+Example: [Program works over dynamic_cast which uses RTTI](/constructor-destructor/RTTI-works-over-dynamic-cast.cpp)
+
+
+
+
+
+
+
 
 
 
