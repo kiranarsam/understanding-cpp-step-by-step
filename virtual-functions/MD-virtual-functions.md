@@ -75,6 +75,27 @@ Adding a virtual function to the base class B makes it working.
 Example: [Program works over dynamic_cast which uses RTTI](/constructor-destructor/RTTI-works-over-dynamic-cast.cpp)
 
 
+## Can virtual functions be private
+Virtual functions can be private and can be overridden by the derived class.
+Note: Check the example problem which works fine with friend function 
+1. `ptr` is a pointer of `Base` type and points to a `Derived` class object. When `ptr->fun()` 
+is called, `fun()` of `Derived` is executed.
+2. `int main()` is a friend of `Base`.  If we remove this friendship, the program won’t 
+compile. We get compiler error.
+
+## Can virtual functions be inlined
+**Virtual functions** are used to achieve runtime polymorphism or say late binding or dynamic 
+binding. Inline functions are used for efficiency. The whole idea behind the inline functions 
+is that whenever inline function is called code of inline function gets inserted or substituted 
+at the point of inline function call at compile time. Inline functions are very useful when 
+small functions are frequently used and called in a program many times.
+
+By default all the functions defined inside the class are implicitly or automatically 
+considered as inline **except virtual functions** (**NOTE** that inline is a request to the 
+compiler and its compilers choice to do inlining or not).
+
+_Whenever virtual function is called using base class reference or pointer it cannot be inlined (because call is resolved at runtime), but whenever called using the object (without reference or pointer) of that class, can be inlined because compiler knows the exact class of the object at compile time_.
+
 
 
 
