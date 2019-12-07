@@ -96,6 +96,51 @@ compiler and its compilers choice to do inlining or not).
 
 _Whenever virtual function is called using base class reference or pointer it cannot be inlined (because call is resolved at runtime), but whenever called using the object (without reference or pointer) of that class, can be inlined because compiler knows the exact class of the object at compile time_.
 
+# Pure Virutal Functions and Abstract Classes
+Sometimes implementation of all function cannot be provided in a base class because we don’t 
+know the implementation. Such a class is called **abstract class**.
+
+A **pure virtual function** (or abstract function) in C++ is a virtual function for which we 
+don’t have implementation, we only declare it. A pure virtual function is declared by assigning 
+0 in declaration.
+
+A pure virtual function is implemented by classes which are derived from a Abstract class. 
+
+## Some intresting facts
+1. A class is abstract if it has at least one pure virtual functions.
+1. We can have pointers and references of abstract class type.
+1. If we don not override the pure virtual function in derived class also becomes abstract class.
+1. An abstract class can have constructors.
+
+# Pure virtual destructor
+### Can a destructor be pure virtual
+**Yes**, it is possible to have pure virtual destructor. Pure virtual destructors are legal in 
+standard C++ and one of the most important things to remember is that if a class contains a 
+pure virtual destructor, it must provide a function body for the pure virtual destructor. You 
+may be wondering why a pure virtual function requires a function body. The reason is because 
+destructors (unlike other functions) are not actually ‘overridden’, rather they are always 
+called in the reverse order of the class derivation. This means that a derived class’ 
+destructor will be invoked first, then base class destructor will be called.
+
+### If the definition of the pure virtual destructor is not provided, then what function body will be called during object destruction? 
+Therefore the compiler and linker enforce the existence of a function body for pure virtual destructors.
+The linker will produce error. Says, undefined references.
+
+Solution: If the definition for the pure virtual destructor is provided, then the program 
+compiles & runs fine.
+
+**NOTE** It is important to note that a class becomes abstract class when it contains a 
+pure virtual destructor.
+
+
+
+
+
+
+
+
+
+
 
 
 
