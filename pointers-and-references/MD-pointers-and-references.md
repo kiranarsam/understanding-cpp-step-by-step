@@ -299,5 +299,254 @@ C++ libraries provide implmentations of smart pointersin following types
 * weak_ptr
 They all are declared in a **memory** header file.
 
+## auto_ptr
+This class template is deprecated. **unique_ptr** is a new facility with a similar functionality
+but with improved security.
 
+**auto_ptr** is a smart pointer that manages an object obtained via new expression and deletes 
+that object when **auto_ptr** itself is destroyed.
+
+An object when described using **auto_ptr** class it stores a pointer to a single allocated 
+object which ensures that when it goes out of scope, the object it points to must get 
+automatically destroyed. It is based on **exclusive ownership model** i.e. two pointers of the 
+same type can’t point to the same resource at the same time. As shown in the below program, 
+copying or assigning of pointers changes the ownership i.e. source pointer has to give 
+ownership to the destination pointer.
+
+The copy constructor and the assignment operator of auto_ptr do not actually copy the stored 
+pointer instead they transfer it, leaving the first auto_ptr object empty. This was one way to 
+implement strict ownership so that only one auto_ptr object can own the pointer at any given 
+time i.e. auto_ptr should not be used where copy semantics are needed.
+
+## Why is auto_ptr deprecated?
+It takes ownership of the pointer in a way that no two pointers should contain the same object. 
+Assignment transfers ownership and resets the rvalue auto pointer to a null pointer. Thus, they 
+can’t be used within STL containers due to the aforementioned inability to be copied.
+
+## unique_ptr
+std::unique_ptr was developed in C++11 as a replacement for std::auto_ptr.
+
+unique_ptr is a new facility with similar functionality, but with improved security (no fake 
+copy assignments), added features (deleters) and support for arrays. It is a container for raw 
+pointers. It explicitly prevents copying of its contained pointer as would happen with normal 
+assignment i.e. it allows exactly one owner of the underlying pointer.
+
+So, when using unique_ptr there can only be at most one unique_ptr at any one resource and when 
+that unique_ptr is destroyed, the resource is automatically claimed. Also, since there can only 
+be one unique_ptr to any resource, so any attempt to make a copy of unique_ptr will cause a 
+compile-time error.
+```
+    unique_ptr<A> ptr1 (new A);
+    unique_ptr<A> ptr2 = ptr1; // Error: can't copy unique_ptr
+```
+But, unique_ptr can be moved using the new move semantics i.e. using `std::move()` function to 
+transfer ownership of the contained pointer to another unique_ptr.
+```
+unique_ptr<A> ptr2 = move(ptr1); // Works, resource now stored in ptr2
+```
+So, it’s best to use unique_ptr when we want a single pointer to an object that will be 
+reclaimed when that single pointer is destroyed.
+
+The below code returns a resource and if we don’t explicitly capture the return value, the 
+resource will be cleaned up. If we do, then we have exclusive ownership of that resource. In 
+this way, we can think of unique_ptr as safer and better replacement of auto_ptr.
+```
+unique_ptr<A> fun() {
+    unique_ptr<A> ptr(new A);
+    // .. some stuff
+    return ptr;
+}
+```
+### When to use unique_ptr?
+Use unique_ptr when you want to have single ownership(Exclusive) of the resource. Only one 
+unique_ptr can point to one resource. Since there can be one unique_ptr for single resource its 
+not possible to copy one unique_ptr to another.
+
+## shared_ptr
+A shared_ptr is a container for raw pointers. It is a **reference counting ownership model** 
+i.e. it maintains the reference count of its contained pointer in cooperation with all copies 
+of the shared_ptr. So, the counter is incremented each time a new pointer points to the 
+resource and decremented when the destructor of the object is called.
+
+**Reference Counting**: It is a technique of storing the number of references, pointers or 
+handles to a resource such as an object, block of memory, disk space or other resources.
+
+An object referenced by the contained raw pointer will not be destroyed until reference count 
+is greater than zero i.e. until all copies of shared_ptr have been deleted.
+
+So, we should use shared_ptr when we want to assign one raw pointer to multiple owners.
+
+### When to use shared_ptr?
+Use shared_ptr if you want to share ownership of a resource. Many shared_ptr can point to a 
+single resource. shared_ptr maintains reference count for this propose. when all shared_ptr’s 
+pointing to resource goes out of scope the resource is destroyed.
+
+## weak_ptr
+A weak_ptr is created as a copy of shared_ptr. It provides access to an object that is owned by one or more shared_ptr instances but does not participate in reference counting. The existence or destruction of weak_ptr has no effect on the shared_ptr or its other copies. It is required in some cases to break circular references between shared_ptr instances.
+
+**Cyclic Dependency (Problems with shared_ptr)**: Let’s consider a scenario where we have two 
+classes A and B, both have pointers to other classes. So, it’s always like A is pointing to B 
+and B is pointing to A. Hence, use_count will never reach zero and they never get deleted.
+
+This is the reason we use **weak pointers(weak_ptr)** as they are not reference counted. So, 
+the class in which weak_ptr is declared doesn’t have a stronghold of it i.e. the ownership 
+isn’t shared, but they can have access to these objects.
+
+So, in case of shared_ptr because of cyclic dependency use_count never reaches zero which is 
+prevented using weak_ptr, which removes this problem by declaring A_ptr as weak_ptr, thus class 
+A does not own it, only have access to it and we also need to check the validity of object as 
+it may go out of scope. In general, it is a design issue.
+
+### When to use weak_ptr?
+When you do want to refer to your object from multiple places – for those references for which 
+it’s ok to ignore and deallocate (so they’ll just note the object is gone when you try to 
+dereference).
+
+# Dangling, Void , Null and Wild Pointers
+## Dangling pointer
+A pointer pointing to a memory location that has been deleted (or freed) is called dangling 
+pointer. There are three different ways where Pointer acts as dangling pointer
+1. De-allocation of memory
+1. Function call
+1. Variable goes out of scope
+
+## Void pointer
+Void pointer is a specific pointer type – `void *` – a pointer that points to some data 
+location in storage, which doesn’t have any specific type. Void refers to the type. Basically 
+the type of data that it points to is can be any. If we assign address of char data type to 
+void pointer it will become char Pointer, if int data type then int pointer and so on. Any 
+pointer type is convertible to a void pointer hence it can point to any value.
+
+### Important Points
+1. void pointers cannot be dereferenced. It can however be done using typecasting the void pointer
+1. Pointer arithmetic is not possible on pointers of void due to lack of concrete value and thus size.
+
+## NULL Pointer
+NULL Pointer is a pointer which is pointing to nothing. In case, if we don’t have address to be 
+assigned to a pointer, then we can simply use NULL.
+
+### Important Points
+1. **NULL vs Uninitialized pointer** – An uninitialized pointer stores an undefined value. A 
+null pointer stores a defined value, but one that is defined by the environment to not be a 
+valid address for any member or object.
+1. **NULL vs Void Pointer** – Null pointer is a value, while void pointer is a type
+
+## Wild pointer
+A pointer which has not been initialized to anything (not even NULL) is known as wild pointer. 
+The pointer may be initialized to a non-NULL garbage value that may not be a valid address.
+
+# Passing by pointer Vs Passing by Reference
+We can pass parameters to a function either by pointers or by reference. In both the cases, we 
+get the same result.
+
+## Difference in Reference variable and pointer variable
+References are generally implemented using pointers. A reference is same object, just with a 
+different name and reference must refer to an object. Since references can’t be NULL, they are 
+safer to use.
+
+1. A pointer can be re-assigned while reference cannot, and must be assigned at initialization only.
+1. Pointer can be assigned NULL directly, whereas reference cannot.
+1. Pointers can iterate over an array, we can use ++ to go to the next item that a pointer is pointing to.
+1. A pointer is a variable that holds a memory address. A reference has the same memory address as the item it references.
+1. A pointer to a class/struct uses ‘->'(arrow operator) to access it’s members whereas a reference uses a ‘.'(dot operator)
+1. A pointer needs to be dereferenced with * to access the memory location it points to, whereas a reference can be used directly.
+
+### Usage in parameter passing:
+References are usually preferred over pointers whenever we don’t need “reseating”.
+
+Overall, Use references when you can, and pointers when you have to.
+
+# NaN – What is it and how to check for it?
+## What is NaN ?
+NaN, acronym for **Not a Number** is an exception which usually occurs in the cases when an 
+expression results in a number that can’t be represented.
+For example square root of negative numbers.
+
+## How to check for NaN ?
+1. Using compare (“==”) operator.
+In this method we check if a number is complex by comparing it with itself. If the result is 
+true, then the number is not complex i.e., real. But if result is false, then “nan” is returned,
+ i.e the number is complex.
+1. Using inbuilt function `isnan()`.
+Another way to check for NaN is by using “isnan()” function, this function returns true if a 
+number is complex else it returns false.
+
+# Understanding nullptr
+Need of nullptr
+```
+int fun(int N) { cout << "fun(int)"; }  // function with integer argument 
+int fun(char* s) { cout << "fun(char *)"; }  // Overloaded function with char pointer argument 
+int main() { 
+	fun(NULL); // Ideally, it should have called fun(char *), but it causes compiler error. 
+} 
+```
+## What is the problem with above program?
+NULL is typically defined as (void *)0 and conversion of NULL to integral types is allowed. So 
+the function call fun(NULL) becomes ambiguous.
+```
+    int x = NULL; // This program compiles (may produce warning) 
+```
+## How does nullptr solve the problem?
+In the above program, if we replace NULL with nullptr, we get the output as “fun(char *)”.
+
+**nullptr** is a keyword that can be used at all places where _NULL_ is expected. Like NULL, 
+nullptr is implicitly convertible and comparable to any pointer type. Unlike NULL, it is not 
+implicitly convertible or comparable to integral types.
+```
+    int x = nullptr; // Compiler Error
+```
+**NOTE**: nullptr is convertible to bool. Below program compile fine.
+```
+    int *ptr = nullptr; 
+```
+
+There are some unspecified things when we compare two simple pointers but comparison between 
+two values of type nullptr_t is specified as, comparison by <= and >= return true and 
+comparison by < and > returns false and comparing any pointer type with nullptr by == and != 
+returns true or false if it is null or non-null respectively.
+
+# Pointers vs References
+Both references and pointers are very similar, both are used to have one variable provide 
+access to another. With both providing lots of the same capabilities, it’s often unclear what 
+is different between these different mechanisms.
+
+**Pointers**: A pointer is a variable that holds memory address of another variable. A pointer 
+needs to be dereferenced with * operator to access the memory location it points to.
+
+**References** : A reference variable is an alias, that is, another name for an already 
+existing variable. A reference, like a pointer, is also implemented by storing the address of an object.
+
+A reference can be thought of as a constant pointer (not to be confused with a pointer to a 
+constant value!) with automatic indirection, i.e the compiler will apply the * operator for you
+
+## Differences
+1. **Initialization**: A pointer can be initialized
+we can declare and initialize pointer at same step or in multiple line.
+References should declare and initialize references at single step.
+1. **Reassignment**: A pointer can be re-assigned. This property is useful for implementation 
+of data structures like linked list, tree, etc.
+On the other hand, a reference cannot be re-assigned, and must be assigned at initialization.
+1. **Memory Address**: A pointer has its own memory address and size on the stack whereas a 
+reference shares the same memory address (with the original variable) but also takes up some 
+space on the stack.
+1. **NULL value**: Pointer can be assigned NULL directly, whereas reference cannot. The 
+constraints associated with references (no NULL, no reassignment) ensure that the underlying 
+operations do not run into exception situation.
+1. **Indirection**: You can have pointers to pointers offering extra levels of indirection. 
+Whereas references only offer one level of indirection.
+1. **Arithmetic operations**: Various arithmetic operations can be performed on pointers 
+whereas there is no such thing called Reference Arithmetic.(but you can take the address of an 
+object pointed by a reference and do pointer arithmetics on it as in &obj + 5).)
+
+## When to use What
+The performances are exactly the same, as references are implemented internally as pointers. 
+But still you can keep some points in your mind to decide when to use what :
+
+**Use references**
+* In function parameters and return types.
+**Use pointers**
+* Use pointers if pointer arithmetic or passing NULL-pointer is needed. For example for arrays 
+(Note that array access is implemented using pointer arithmetic).
+* To implement data structures like linked list, tree, etc and their algorithms because to 
+point different cell, we have to use the concept of pointers.
 
