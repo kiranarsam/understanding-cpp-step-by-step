@@ -86,6 +86,26 @@ fact Turing-complete, meaning that any computation expressible by a computer pro
 can be computed, in some form, by a template metaprogram. Template Metaprogramming is 
 generally not used in practical programs, it is an interesting conecpt though.
 
+# Templates and Static variables
+**Function templates and static variables**:
+Each instantiation of function template has its own copy of local static variables. For example, there are two instances: void fun(int ) and void fun(double ). So two 
+copies of static variable i exist.
+
+**Class templates and static variables**:
+The rule for class templates is same as function templates
+Each instantiation of class template has its own copy of member static variables. For example, there are two instances Test and Test. So two copies of static variable 
+count exist.
+
+# Templates and Default Arguments
+**Default parameters for templates**:
+Like function default arguments, templates can also have default arguments. For 
+example, the second parameter U has the default value as char.
+source: [Default parameters for templates](default-value-in-templates.cpp)
+
+**NOTE**: Also, similar to default function arguments, if one template parameter has 
+a default argument, then all template parameters following it must also have default arguments.
+
+
 
 
 
