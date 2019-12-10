@@ -54,3 +54,10 @@ int main() {
 
     return 0;
 }
+
+/*
+Explanation: Here the destructor is explicitly called because 
+here it cannot be packaged within the delete operator because 
+delete will need to release the memory which you do not have here and 
+it cannot be implicit as it is a dynamic process which we want to mange yourself.
+*/
