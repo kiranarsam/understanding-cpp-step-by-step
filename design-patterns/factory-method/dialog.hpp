@@ -5,6 +5,10 @@
 #include <iostream>
 #include "button.hpp"
 
+void closeDialog() {
+    std::cout << "Closing Dialog " << std::endl;
+}
+
 class Dialog {
     public:
         Dialog() {
@@ -17,7 +21,7 @@ class Dialog {
         void render() {
             button = createButton();
             if(button) {
-                button->onClick();
+                button->onClick(closeDialog);
                 button->render();
             }
             else
