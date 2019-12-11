@@ -1,3 +1,4 @@
+// Each concrete factory has a corresponding product variant.
 #ifndef MAC_FACTORY_HPP
 #define MAC_FACTORY_HPP
 

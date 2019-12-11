@@ -1,3 +1,6 @@
+// The application picks the factory type depending on the
+// current configuration or environment settings and creates it
+// at runtime (usually at the initialization stage).
 #include "applicaton_configurator.hpp"
 #include "win_factory.hpp"
 #include "mac_factory.hpp"

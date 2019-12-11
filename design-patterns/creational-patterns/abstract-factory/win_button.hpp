@@ -1,3 +1,4 @@
+// Concrete products are created by corresponding concrete factories.
 #ifndef WIN_BUTTON_HPP
 #define WIN_BUTTON_HPP
 

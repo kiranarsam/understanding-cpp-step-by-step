@@ -9,6 +9,10 @@ make all variants of products follow those interfaces. For example, all chair va
 implement the Chair interface; all coffee table variants can implement the CoffeeTable 
 interface, and so on.
 
+## Structure
+
+![Abstract Factory Concrete design](abstract-factory-pattern.png)
+
 1. **Abstract Products** declare interfaces for a set of distinct but related products which make up a product family.
 2. **Concrete Products** are various implementations of abstract products, grouped by 
 variants. Each abstract product (chair/sofa) must be implemented in all given variants 
@@ -27,5 +31,19 @@ This example illustrates how the Abstract Factory pattern can be used for creati
 cross-platform UI elements without coupling the client code to concrete UI classes, while 
 keeping all created elements consistent with a selected operating system.
 
+![Abstract Factory Concrete design](abstract-factory.png)
+
+## How to Implement
+1. Map out a matrix of distinct product types versus variants of these products.
+1. Declare abstract product interfaces for all product types. Then make all concrete product 
+classes implement these interfaces.
+1. Declare the abstract factory interface with a set of creation
+methods for all abstract products.
+1. Implement a set of concrete factory classes, one for each product variant.
+1. Create factory initialization code somewhere in the app. It should instantiate one of the 
+concrete factory classes, depending on the application configuration or the current 
+environment. Pass this factory object to all classes that construct products.
+1. Scan through the code and find all direct calls to product constructors. Replace them with 
+calls to the appropriate creation method on the factory object.
 
 
