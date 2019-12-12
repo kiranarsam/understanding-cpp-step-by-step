@@ -55,12 +55,19 @@ In addition, all patterns can be categorized by their intent, or purpose.
 
 1. **Structural patterns** explain how to assemble objects and classes into larger structures, while keeping the structures flexible and efficient.
     * **Adapter**
+        * Provides a unified interface that allows objects with incompatible interfaces to collaborate.
     * **Bridge**
+        * Let you split a large class or a set of closely related classes into two separate hierarchies - abstraction and implementation - which can be developed independently of each other
     * **Composite**
+        * Lets you compose objects into tree structures and then work with these structures as if they were individual objects.
     * **Decorator**
+        * Let you attach new behaviours to objects by placing these objects inside special wrapper objects that contain the behaviours.
     * **Facade**
+        * Provides a simlified interface to a library, a framework, or any other complex set of classes.
     * **Flyweight**
+        * Lets you fit more objects into the available amount of RAM by sharing common parts of state between objects, instead of keeping all of the data in each object.
     * **Proxy**
+        * Lets you provide a substitue or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
 
 1. **Behavioral patterns** take care of effective communication and the assignment of responsibilities between objects.
     * **Chain of Responsibility**
