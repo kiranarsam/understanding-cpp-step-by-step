@@ -6,7 +6,7 @@
  * 1. Take one string of any length and calculate its length.
  * 2. Scan string character by character and keep checking  the index .
  *      If character in a index is in lower case, then subtract 32 to convert 
- *      it in upper case, else add 32 to convert it in upper case.
+ *      it in upper case, else add 32 to convert it in lower case.
  * 3. Print the final string.
 */
 
